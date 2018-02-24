@@ -2,6 +2,8 @@
 
 Code for TMI 2018 "Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation"
 
+Project homepage：http://hzfu.github.io/proj_glaucoma_fundus.html
+
 1. The code is based on: *Keras 2.0 + Tensorflow*
 2. The input image is the disc center patch with *800 x 800* size.
 3. The output is raw segmentation result without ellipse fitting.
