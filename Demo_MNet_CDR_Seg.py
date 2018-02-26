@@ -38,6 +38,7 @@ CDRSeg_model.load_weights(pre_model_MNetSeg, by_name=True)
 for lineIdx in range(0, len(file_test_list)):
     temp_txt = [elt.strip() for elt in file_test_list[lineIdx].split(',')]
     disc_region = np.asarray(image.load_img(data_img_path + temp_txt[0]))
+    disc_region = scipy.misc.imresize(disc_region, (DiscROI_size, DiscROI_size, 3))
 
     run_time_start = time()
     Disc_flat = rotate(cv2.linearPolar(disc_region, (DiscROI_size/2, DiscROI_size/2),
