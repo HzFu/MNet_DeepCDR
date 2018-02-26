@@ -12,3 +12,10 @@ Project homepage：http://hzfu.github.io/proj_glaucoma_fundus.html
 
 [1] Huazhu Fu, Jun Cheng, Yanwu Xu, Damon Wing Kee Wong, Jiang Liu, and Xiaochun Cao, "Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation", IEEE Transactions on Medical Imaging (TMI), 2018. DOI: 10.1109/TMI.2018.2791488 (ArXiv version: https://arxiv.org/abs/1801.00926) 
 
+
+
+----------------
+
+18.02.26: Add CDR calculation code (based on Matlab)
+18.02.24: Release the code
+
