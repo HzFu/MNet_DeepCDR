@@ -16,6 +16,8 @@ Project homepage：http://hzfu.github.io/proj_glaucoma_fundus.html
 
 ----------------
 
+Update log:
+
 - 18.02.26: Add CDR calculation code (based on Matlab)
 - 18.02.24: Release the code
 
