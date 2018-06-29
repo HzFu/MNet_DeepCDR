@@ -1,7 +1,5 @@
-function [ CDR] = fun_CalCDR( input_map )
+function [ CDR] = fun_CalCDR(disc_map, cup_map)
 % 
-disc_map = input_map(:,:,1);
-cup_map = input_map(:,:,2);
 
 [disc_x, ~] = find(disc_map>0);
 [cup_x, ~] = find(cup_map>0);

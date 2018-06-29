@@ -82,13 +82,11 @@ for lineIdx in range(0, len(file_test_list)):
     print(' Run time MNet: ' + str(run_time_end - run_time_start) + '   Img number: ' + str(lineIdx + 1))
 
     # Save mask
-    ROI_result = np.zeros((DiscROI_size, DiscROI_size, 3))
-    ROI_result[..., 0] = BW_img(De_disc_map, 0.5)
-    ROI_result[..., 1] = BW_img(De_cup_map, 0.5)
+    ROI_result = np.array(BW_img(De_disc_map, 0.5), dtype=int) + np.array(BW_img(De_cup_map, 0.5), dtype=int)
 
-    Img_result = np.zeros(org_img.shape)
+    Img_result = np.zeros((org_img.shape[0],org_img.shape[1]), dtype=int)
     Img_result[int(C_x-DiscROI_size/2):int(C_x+DiscROI_size/2), 
-               int(C_y-DiscROI_size/2):int(C_y+DiscROI_size/2), ] = ROI_result
+               int(C_y-DiscROI_size/2):int(C_y+DiscROI_size/2)] = ROI_result
 
     sio.savemat(data_save_path + temp_txt[0][:-4] + '.mat', {'Img_map': Img_result, 'ROI_map': ROI_result})
 

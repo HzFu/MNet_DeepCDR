@@ -11,5 +11,6 @@ CDR_list = zeros([img_num, 1]);
 for idx = 1:img_num
     img_name = img_list(idx).name;
     load([img_result img_name(1:end-4) '.mat']);
-    CDR_list(idx) = fun_CalCDR( cat(3, ROI_map(:,:,1), ROI_map(:,:,2)) );
+    
+    CDR_list(idx) = fun_CalCDR( ROI_map > 0, ROI_map > 1);
 end
