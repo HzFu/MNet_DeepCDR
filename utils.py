@@ -10,8 +10,12 @@ def pro_process(temp_img,input_size):
     img = scipy.misc.imresize(img, (input_size, input_size, 3))
     return img
 
-def BW_img(input, thresholding):
-    binary = input > thresholding
+def BW_img(input,thresholding):
+    if input.max() > thresholding:
+        binary = input > thresholding
+    else:
+        binary = input > input.max()/2.0
+        
     label_image = label(binary)
     regions = regionprops(label_image)
     area_list = []
