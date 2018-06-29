@@ -4,7 +4,7 @@ Code for TMI 2018 "Joint Optic Disc and Cup Segmentation Based on Multi-label De
 
 Project homepage：http://hzfu.github.io/proj_glaucoma_fundus.html
 
-1. The code is based on: *Keras 2.0 + Tensorflow*
+1. The code is based on: *Keras 2.0 + Tensorflow 1.0*
 2. The output is raw segmentation result without ellipse fitting.
 3. The code including (A) disc detection and (B) Disc/Cup segmentation. 
 3. The pre-train models *'Model_DiscSeg_ORIGA_pretrain.h5'* and *'Model_MNet_ORIGA_pretrain.h5'* is trained on **ORIGA full dataset**.
