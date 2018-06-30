@@ -53,8 +53,8 @@ for lineIdx in range(0, len(file_test_list)):
     disc_map = BW_img(np.reshape(prob_10, (DiscSeg_size, DiscSeg_size)), 0.5)
 
     regions = regionprops(label(disc_map))
-    C_x = regions[0].centroid[0] * org_img.shape[0] / DiscSeg_size
-    C_y = regions[0].centroid[1] * org_img.shape[1] / DiscSeg_size
+    C_x = int(regions[0].centroid[0] * org_img.shape[0] / DiscSeg_size)
+    C_y = int(regions[0].centroid[1] * org_img.shape[1] / DiscSeg_size)
     disc_region, err_coord, crop_coord = disc_crop(org_img, DiscROI_size, C_x, C_y)
 
     # Disc and Cup segmentation by M-Net
@@ -87,6 +87,6 @@ for lineIdx in range(0, len(file_test_list)):
     Img_result = np.zeros((org_img.shape[0],org_img.shape[1]), dtype=int)
     Img_result[crop_coord[0]:crop_coord[1], crop_coord[2]:crop_coord[3], ] = ROI_result[err_coord[0]:err_coord[1], err_coord[2]:err_coord[3], ]
 
-    sio.savemat(data_save_path + temp_txt[0][:-4] + '.mat', {'Img_map': Img_result, 'ROI_map': ROI_result})
+    sio.savemat(data_save_path + temp_txt[0][:-4] + '.mat', {'Img_map': np.array(Img_result, dtype=np.uint8), 'ROI_map': np.array(ROI_result, dtype=np.uint8)})
 
 
