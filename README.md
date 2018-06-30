@@ -24,6 +24,7 @@ If you use this code, please cite the following papers:
 
 Update log:
 
+- 18.06.30: Fixed the bug for macular center fundus
 - 18.06.29: Added disc detection code (based on U-Net)
 - 18.02.26: Added CDR calculation code (based on Matlab)
 - 18.02.24: Released the code
