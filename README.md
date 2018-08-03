@@ -22,7 +22,16 @@ If you use this code, please cite the following papers:
 
 
 ----------------
+**For ORIGA and SCES datasets**
 
+Unfortunately, the ORIGA and SCES datasets cannot be released due to the clinical policy.
+
+But, here is an other glaucoma challenge, *Retinal Fundus Glaucoma Challenge (REFUGE)*, including disc/cup segmentation, glaucoma screening, and localization of Fovea. If you are interested, you can register it from:
+[[HERE]](https://refuge.grand-challenge.org/home/)
+
+We also provide the results of our MNet, the details could be found from: [[HERE]](https://github.com/HzFu/REFUGE_baseline) 
+
+----------------
 Update log:
 
 - 18.06.30: Added ellipse fitting code (based on Matlab), and Fixed the bug for macular center fundus.
