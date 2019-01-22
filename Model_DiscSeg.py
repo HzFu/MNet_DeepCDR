@@ -55,6 +55,6 @@ def DeepModel(size_set = 640):
     out10 = average([out6, out7, out8, out9])
     #out10 = Conv2D(1, (1, 1), activation='sigmoid', name='side_10')(out10)
 
-    model = Model(inputs=[img_input], outputs=[out6, out7, out8, out9, out10])
+    model = Model(inputs=[img_input], outputs=[out10])
 
     return model
