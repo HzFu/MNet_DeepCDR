@@ -6,7 +6,7 @@ from mnet_utils import dice_coef_loss, train_loader, mk_dir, return_list
 import Model_MNet as DeepModel
 
 result_path = mk_dir('./deep_model/')
-pre_model_file = './deep_model/Model_MNet_REFUGE_v1.h5'
+pre_model_file = './deep_model/Model_MNet_REFUGE.h5'
 save_model_file = result_path + 'Model_MNet_REFUGE_v2.h5'
 
 root_path = './../training_crop/'

@@ -24,10 +24,9 @@ file_test_list = return_list(test_data_path, '.jpg')
 
 DiscSeg_model = DiscModel.DeepModel(size_set=DiscSeg_size)
 DiscSeg_model.load_weights('./deep_model/Model_DiscSeg_ORIGA.h5')
-DiscSeg_model.save_weights('./deep_model/Model_DiscSeg_ORIGA_para.h5')
+
 CDRSeg_model = MNetModel.DeepModel(size_set=CDRSeg_size)
-CDRSeg_model.load_weights('./deep_model/Model_MNet_REFUGE_v2.h5')
-CDRSeg_model.save_weights('./deep_model/Model_MNet_REFUGE_para.h5')
+CDRSeg_model.load_weights('./deep_model/Model_MNet_REFUGE.h5')
 
 for lineIdx in range(len(file_test_list)):
 
