@@ -1,11 +1,14 @@
 #
+from __future__ import print_function
+from os import path
+
 import numpy as np
-import scipy.io as sio
 from keras.preprocessing import image
 from skimage.transform import rotate, resize
 from skimage.measure import label, regionprops
 from mnet_utils import BW_img, disc_crop, mk_dir, return_list
 from PIL import Image
+
 import matplotlib.pyplot as plt
 import cv2
 
@@ -17,34 +20,37 @@ DiscSeg_size = 640
 CDRSeg_size = 400
 
 data_type = '.jpg'
-data_img_path = '../data/REFUGE-Training400/Training400/Glaucoma/'
-label_img_path = '../data/Annotation-Training400/Annotation-Training400/Disc_Cup_Masks/Glaucoma/'
+_parent_dir = path.dirname(path.dirname(__file__))
+data_img_path = path.join(_parent_dir, 'data', 'REFUGE-Training400', 'Training400', 'Glaucoma')
+label_img_path = path.join(_parent_dir, 'data', 'Annotation-Training400',
+                           'Annotation-Training400', 'Disc_Cup_Masks', 'Glaucoma')
 
-data_save_path = mk_dir('../training_crop/data/')
-label_save_path = mk_dir('../training_crop/label/')
+data_save_path = mk_dir(path.join(_parent_dir, 'training_crop', 'data'))
+label_save_path = mk_dir(path.join(_parent_dir, 'training_crop', 'label'))
 
 
 file_test_list = return_list(data_img_path, data_type)
 
 DiscSeg_model = DiscModel.DeepModel(size_set=DiscSeg_size)
-DiscSeg_model.load_weights('./deep_model/Model_DiscSeg_ORIGA.h5')
+DiscSeg_model.load_weights(path.join('deep_model', 'Model_DiscSeg_ORIGA.h5'))
+
+Disc_flat = None
 
 for lineIdx in range(len(file_test_list)):
-
     temp_txt = file_test_list[lineIdx]
-    print(' Processing Img ' + str(lineIdx + 1) + ': ' + temp_txt)
+    print('Processing Img {idx}: {temp_txt}'.format(idx=lineIdx + 1, temp_txt=temp_txt))
 
     # load image
     org_img = np.asarray(image.load_img(data_img_path + temp_txt))
 
     # load label
-    org_label = np.asarray(image.load_img(label_img_path + temp_txt[:-4] + '.bmp'))[:,:,0]
+    org_label = np.asarray(image.load_img(label_img_path + temp_txt[:-4] + '.bmp'))[:, :, 0]
     new_label = np.zeros(np.shape(org_label) + (3,), dtype=np.uint8)
     new_label[org_label < 200, 0] = 255
     new_label[org_label < 100, 1] = 255
 
     # Disc region detection by U-Net
-    temp_img = resize(org_img, (DiscSeg_size, DiscSeg_size, 3))*255
+    temp_img = resize(org_img, (DiscSeg_size, DiscSeg_size, 3)) * 255
     temp_img = np.reshape(temp_img, (1,) + temp_img.shape)
     disc_map = DiscSeg_model.predict([temp_img])
 
@@ -61,14 +67,12 @@ for lineIdx in range(len(file_test_list)):
         Disc_flat = rotate(cv2.linearPolar(disc_region, (DiscROI_size/2, DiscROI_size/2), DiscROI_size/2,
                                            cv2.INTER_NEAREST+cv2.WARP_FILL_OUTLIERS), -90)
         Label_flat = rotate(cv2.linearPolar(label_region, (DiscROI_size/2, DiscROI_size/2), DiscROI_size/2,
-                                           cv2.INTER_NEAREST+cv2.WARP_FILL_OUTLIERS), -90)
+                                            cv2.INTER_NEAREST+cv2.WARP_FILL_OUTLIERS), -90)
 
         disc_result = Image.fromarray((Disc_flat * 255).astype(np.uint8))
-        disc_result.save(data_save_path + temp_txt[:-4] + '_' + str(DiscROI_size) + '.png')
+        disc_result.save(path.join(data_save_path, temp_txt[:-4] + '_' + str(DiscROI_size) + '.png'))
         label_result = Image.fromarray((Label_flat * 255).astype(np.uint8))
-        label_result.save(label_save_path + temp_txt[:-4] + '_' + str(DiscROI_size) + '.png')
+        label_result.save(path.join(label_save_path, temp_txt[:-4] + '_' + str(DiscROI_size) + '.png'))
 
 plt.imshow(Disc_flat)
 plt.show()
-
-

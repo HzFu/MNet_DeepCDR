@@ -42,3 +42,10 @@ Update log:
 - 18.02.26: Added CDR calculation code (based on Matlab).
 - 18.02.24: Released the code.
 
+---
+
+## Install
+
+    pip install -r requirements.txt
+
+OpenCV will need to be installed separately.

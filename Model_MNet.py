@@ -3,10 +3,10 @@ from __future__ import absolute_import
 
 from keras.models import Model
 from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, AveragePooling2D, Conv2DTranspose, UpSampling2D
-from keras.layers import  BatchNormalization, Activation, average
+from keras.layers import average
 
-def DeepModel(size_set = 800):
 
+def DeepModel(size_set=800):
     img_input = Input(shape=(size_set, size_set, 3))
     
     scale_img_2 = AveragePooling2D(pool_size=(2, 2))(img_input)
