@@ -1,15 +1,18 @@
 #
-import numpy as np
-from keras import backend as K
-import scipy
-from skimage.measure import label, regionprops
+from __future__ import print_function
+
 import os
+import numpy as np
+from PIL import Image
+from keras import backend as K
 from keras.preprocessing import image
+from scipy.ndimage import binary_fill_holes
+from skimage.measure import label, regionprops
 
 
-def pro_process(temp_img,input_size):
+def pro_process(temp_img, input_size):
     img = np.asarray(temp_img).astype('float32')
-    img = scipy.misc.imresize(img, (input_size, input_size, 3))
+    img = np.array(Image.fromarray(img).resize((input_size, input_size)).convert(3))
     return img
 
 
@@ -40,7 +43,7 @@ def BW_img(input, thresholding):
     if area_list:
         idx_max = np.argmax(area_list)
         binary[label_image != idx_max+1] = 0
-    return scipy.ndimage.binary_fill_holes(np.asarray(binary).astype(int))
+    return binary_fill_holes(np.asarray(binary).astype(int))
 
 
 def dice_coef(y_true, y_pred):
@@ -64,9 +67,9 @@ def dice_coef_loss(y_true, y_pred):
 
 
 def disc_crop(org_img, DiscROI_size, C_x, C_y):
-    tmp_size = int(DiscROI_size/2);
-    disc_region = np.zeros((DiscROI_size, DiscROI_size, 3), dtype= org_img.dtype)
-    crop_coord = np.array([C_x-tmp_size, C_x+tmp_size, C_y-tmp_size, C_y+tmp_size], dtype= int)
+    tmp_size = int(DiscROI_size/2)
+    disc_region = np.zeros((DiscROI_size, DiscROI_size, 3), dtype=org_img.dtype)
+    crop_coord = np.array([C_x-tmp_size, C_x+tmp_size, C_y-tmp_size, C_y+tmp_size], dtype=int)
     err_coord = [0, DiscROI_size, 0, DiscROI_size]
 
     if crop_coord[0] < 0:
@@ -85,7 +88,8 @@ def disc_crop(org_img, DiscROI_size, C_x, C_y):
         err_coord[3] = err_coord[3] - (crop_coord[3] - org_img.shape[1]) 
         crop_coord[3] = org_img.shape[1]
         
-    disc_region[err_coord[0]:err_coord[1], err_coord[2]:err_coord[3], ] = org_img[crop_coord[0]:crop_coord[1], crop_coord[2]:crop_coord[3], ]
+    disc_region[err_coord[0]:err_coord[1],
+                err_coord[2]:err_coord[3], ] = org_img[crop_coord[0]:crop_coord[1], crop_coord[2]:crop_coord[3], ]
 
     return disc_region, err_coord, crop_coord
 

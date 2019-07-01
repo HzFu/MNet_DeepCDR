@@ -24,4 +24,3 @@ for idx = 1:img_num
     save(['./final_result/' img_name(1:end-4) '.mat'], 'CDR_value');
     imwrite(uint8(Seg_map), ['./final_result/' img_name(1:end-4) '.bmp']);
 end
-

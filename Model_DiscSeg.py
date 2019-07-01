@@ -5,8 +5,7 @@ from keras.models import Model
 from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, Conv2DTranspose, UpSampling2D, average
 
 
-def DeepModel(size_set = 640):
-
+def DeepModel(size_set=640):
     img_input = Input(shape=(size_set, size_set, 3))
 
     conv1 = Conv2D(32, (3, 3), activation='relu', padding='same', name='block1_conv1')(img_input)
@@ -53,7 +52,7 @@ def DeepModel(size_set = 640):
     out9 = Conv2D(1, (1, 1), activation='sigmoid', name='side_9')(conv9)
 
     out10 = average([out6, out7, out8, out9])
-    #out10 = Conv2D(1, (1, 1), activation='sigmoid', name='side_10')(out10)
+    # out10 = Conv2D(1, (1, 1), activation='sigmoid', name='side_10')(out10)
 
     model = Model(inputs=[img_input], outputs=[out10])
 

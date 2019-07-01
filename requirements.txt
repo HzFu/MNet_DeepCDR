@@ -1,0 +1,7 @@
+keras
+matplotlib
+numpy
+pillow
+scikit-image
+scipy
+tensorflow==1.14.0
