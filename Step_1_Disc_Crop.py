@@ -12,7 +12,7 @@ from skimage.transform import rotate, resize
 from tensorflow.python.keras.preprocessing import image
 
 import Model_DiscSeg as DiscModel
-from mnet_utils import BW_img, disc_crop, mk_dir, return_list
+from mnet_utils import BW_img, disc_crop, mk_dir, files_with_ext
 
 disc_list = [400, 500, 600, 700, 800]
 DiscROI_size = 800
@@ -28,7 +28,7 @@ label_img_path = path.abspath(path.join(_parent_dir, 'data', 'Annotation-Trainin
 data_save_path = mk_dir(path.join(_parent_dir, 'training_crop', 'data'))
 label_save_path = mk_dir(path.join(_parent_dir, 'training_crop', 'label'))
 
-file_test_list = return_list(data_img_path, data_type)
+file_test_list = files_with_ext(data_img_path, data_type)
 
 DiscSeg_model = DiscModel.DeepModel(size_set=DiscSeg_size)
 DiscSeg_model.load_weights(path.join('deep_model', 'Model_DiscSeg_ORIGA.h5'))

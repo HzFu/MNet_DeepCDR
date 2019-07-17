@@ -7,7 +7,7 @@ from os import path
 from tensorflow.python.keras.optimizers import SGD
 
 import Model_MNet as DeepModel
-from mnet_utils import dice_coef_loss, train_loader, mk_dir, return_list
+from mnet_utils import dice_coef_loss, train_loader, mk_dir, files_with_ext
 
 result_path = mk_dir('deep_model')
 pre_model_file = path.join('deep_model', 'Model_MNet_REFUGE.h5')
@@ -21,8 +21,8 @@ val_data_path = path.join(root_path, 'val_data', 'data')
 val_mask_path = path.join(root_path, 'val_data', 'label')
 
 # load training data
-train_list = return_list(train_data_path, '.png')
-val_list = return_list(val_data_path, '.png')
+train_list = files_with_ext(train_data_path, '.png')
+val_list = files_with_ext(val_data_path, '.png')
 
 Total_iter = 100
 nb_epoch_setting = 3

@@ -104,7 +104,7 @@ def mk_dir(dir_path):
     return dir_path
 
 
-def return_list(data_path, data_type):
+def files_with_ext(data_path, data_type):
     file_list = [file for file in os.listdir(data_path) if file.lower().endswith(data_type)]
     print(len(file_list))
     return file_list

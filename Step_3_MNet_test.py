@@ -13,7 +13,7 @@ from tensorflow.python.keras.preprocessing import image
 
 import Model_DiscSeg as DiscModel
 import Model_MNet as MNetModel
-from mnet_utils import pro_process, BW_img, disc_crop, mk_dir, return_list
+from mnet_utils import pro_process, BW_img, disc_crop, mk_dir, files_with_ext
 
 DiscROI_size = 600
 DiscSeg_size = 640
@@ -22,7 +22,7 @@ CDRSeg_size = 400
 test_data_path = 'test_img'
 data_save_path = mk_dir('result')
 
-file_test_list = return_list(test_data_path, '.jpg')
+file_test_list = files_with_ext(test_data_path, '.jpg')
 
 DiscSeg_model = DiscModel.DeepModel(size_set=DiscSeg_size)
 DiscSeg_model.load_weights(path.join('deep_model', 'Model_DiscSeg_ORIGA.h5'))
@@ -33,7 +33,7 @@ CDRSeg_model.load_weights(path.join('deep_model', 'Model_MNet_REFUGE.h5'))
 for lineIdx in range(len(file_test_list)):
     temp_txt = file_test_list[lineIdx]
     # load image
-    org_img = np.asarray(image.load_img(test_data_path + temp_txt))
+    org_img = np.asarray(image.load_img(path.join(test_data_path, temp_txt)))
     # Disc region detection by U-Net
     temp_img = resize(org_img, (DiscSeg_size, DiscSeg_size, 3)) * 255
     temp_img = np.reshape(temp_img, (1,) + temp_img.shape)
