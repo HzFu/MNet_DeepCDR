@@ -1,18 +1,19 @@
 #
 from __future__ import print_function
+
 from os import path
-
-import numpy as np
-from keras.preprocessing import image
-from PIL import Image
-from skimage.transform import rotate, resize
-from skimage.measure import label, regionprops
 from time import time
-import cv2
 
-from mnet_utils import pro_process, BW_img, disc_crop, mk_dir, return_list
+import cv2
+import numpy as np
+from PIL import Image
+from skimage.measure import label, regionprops
+from skimage.transform import rotate, resize
+from tensorflow.python.keras.preprocessing import image
+
 import Model_DiscSeg as DiscModel
 import Model_MNet as MNetModel
+from mnet_utils import pro_process, BW_img, disc_crop, mk_dir, return_list
 
 DiscROI_size = 600
 DiscSeg_size = 640
@@ -46,8 +47,8 @@ for lineIdx in range(len(file_test_list)):
 
     # Disc and Cup segmentation by M-Net
     run_start = time()
-    Disc_flat = rotate(cv2.linearPolar(disc_region, (DiscROI_size/2, DiscROI_size/2),
-                                       DiscROI_size/2, cv2.WARP_FILL_OUTLIERS), -90)
+    Disc_flat = rotate(cv2.linearPolar(disc_region, (DiscROI_size / 2, DiscROI_size / 2),
+                                       DiscROI_size / 2, cv2.WARP_FILL_OUTLIERS), -90)
 
     temp_img = pro_process(Disc_flat, CDRSeg_size)
     temp_img = np.reshape(temp_img, (1,) + temp_img.shape)
@@ -60,21 +61,21 @@ for lineIdx in range(len(file_test_list)):
     cup_map = np.array(Image.fromarray(prob_map[:, :, 1]).resize((DiscROI_size, DiscROI_size)))
     disc_map[-round(DiscROI_size / 3):, :] = 0
     cup_map[-round(DiscROI_size / 2):, :] = 0
-    De_disc_map = cv2.linearPolar(rotate(disc_map, 90), (DiscROI_size/2, DiscROI_size/2),
-                                  DiscROI_size/2, cv2.WARP_FILL_OUTLIERS + cv2.WARP_INVERSE_MAP)
-    De_cup_map = cv2.linearPolar(rotate(cup_map, 90), (DiscROI_size/2, DiscROI_size/2),
-                                 DiscROI_size/2, cv2.WARP_FILL_OUTLIERS + cv2.WARP_INVERSE_MAP)
+    De_disc_map = cv2.linearPolar(rotate(disc_map, 90), (DiscROI_size / 2, DiscROI_size / 2),
+                                  DiscROI_size / 2, cv2.WARP_FILL_OUTLIERS + cv2.WARP_INVERSE_MAP)
+    De_cup_map = cv2.linearPolar(rotate(cup_map, 90), (DiscROI_size / 2, DiscROI_size / 2),
+                                 DiscROI_size / 2, cv2.WARP_FILL_OUTLIERS + cv2.WARP_INVERSE_MAP)
 
     De_disc_map = np.array(BW_img(De_disc_map, 0.5), dtype=int)
     De_cup_map = np.array(BW_img(De_cup_map, 0.5), dtype=int)
 
     print(' Processing Img {idx}: {temp_txt}, running time: {running_time}'.format(
-        idx=lineIdx+1, temp_txt=temp_txt, running_time=run_end - run_start
+        idx=lineIdx + 1, temp_txt=temp_txt, running_time=run_end - run_start
     ))
 
     # Save raw mask
     ROI_result = np.array(BW_img(De_disc_map, 0.5), dtype=int) + np.array(BW_img(De_cup_map, 0.5), dtype=int)
     Img_result = np.zeros((org_img.shape[0], org_img.shape[1]), dtype=np.int8)
     Img_result[crop_xy[0]:crop_xy[1], crop_xy[2]:crop_xy[3], ] = ROI_result[err_xy[0]:err_xy[1], err_xy[2]:err_xy[3], ]
-    save_result = Image.fromarray((Img_result*127).astype(np.uint8))
+    save_result = Image.fromarray((Img_result * 127).astype(np.uint8))
     save_result.save(path.join(data_save_path, temp_txt[:-4] + '.png'))

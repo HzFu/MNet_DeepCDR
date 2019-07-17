@@ -4,7 +4,7 @@
 
 Project homepage：http://hzfu.github.io/proj_glaucoma_fundus.html
 
-1. The code is based on: *Keras 2.0 + Tensorflow 1.0 + Matlab*
+1. The code is based on: *TensorFlow 1.14 (with Keras) + Matlab*
 2. The deep output is raw segmentation result without ellipse fitting. The Matlab code is the ellipse fitting and CDR calculation (by using PDollar toolbox: https://pdollar.github.io/toolbox/).
 3. You can run the 'Step\_3\_MNet\_test.py' for testing any new image directly.
 4. We also provided the validation and test results on [REFUGE dataset](https://refuge.grand-challenge.org/home/) in 'REFUGE\_result' fold.

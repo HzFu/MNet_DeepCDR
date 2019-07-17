@@ -1,8 +1,9 @@
-from __future__ import print_function
 from __future__ import absolute_import
+from __future__ import print_function
 
-from keras.models import Model
-from keras.layers import Input, concatenate, Conv2D, MaxPooling2D, Conv2DTranspose, UpSampling2D, average
+from tensorflow.python.keras.layers import (Input, concatenate, Conv2D, MaxPooling2D,
+                                            Conv2DTranspose, UpSampling2D, average)
+from tensorflow.python.keras.models import Model
 
 
 def DeepModel(size_set=640):
@@ -27,19 +28,23 @@ def DeepModel(size_set=640):
     conv5 = Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv1')(pool4)
     conv5 = Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv2')(conv5)
 
-    up6 = concatenate([Conv2DTranspose(256, (2, 2), strides=(2, 2), padding='same', name='block6_dconv')(conv5), conv4], axis=3)
+    up6 = concatenate([Conv2DTranspose(256, (2, 2), strides=(2, 2), padding='same', name='block6_dconv')(conv5), conv4],
+                      axis=3)
     conv6 = Conv2D(256, (3, 3), activation='relu', padding='same', name='block6_conv1')(up6)
     conv6 = Conv2D(256, (3, 3), activation='relu', padding='same', name='block6_conv2')(conv6)
 
-    up7 = concatenate([Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same', name='block7_dconv')(conv6), conv3], axis=3)
+    up7 = concatenate([Conv2DTranspose(128, (2, 2), strides=(2, 2), padding='same', name='block7_dconv')(conv6), conv3],
+                      axis=3)
     conv7 = Conv2D(128, (3, 3), activation='relu', padding='same', name='block7_conv1')(up7)
     conv7 = Conv2D(128, (3, 3), activation='relu', padding='same', name='block7_conv2')(conv7)
 
-    up8 = concatenate([Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same', name='block8_dconv')(conv7), conv2], axis=3)
+    up8 = concatenate([Conv2DTranspose(64, (2, 2), strides=(2, 2), padding='same', name='block8_dconv')(conv7), conv2],
+                      axis=3)
     conv8 = Conv2D(64, (3, 3), activation='relu', padding='same', name='block8_conv1')(up8)
     conv8 = Conv2D(64, (3, 3), activation='relu', padding='same', name='block8_conv2')(conv8)
 
-    up9 = concatenate([Conv2DTranspose(32, (2, 2), strides=(2, 2), padding='same', name='block9_dconv')(conv8), conv1], axis=3)
+    up9 = concatenate([Conv2DTranspose(32, (2, 2), strides=(2, 2), padding='same', name='block9_dconv')(conv8), conv1],
+                      axis=3)
     conv9 = Conv2D(32, (3, 3), activation='relu', padding='same', name='block9_conv1')(up9)
     conv9 = Conv2D(32, (3, 3), activation='relu', padding='same', name='block9_conv2')(conv9)
 
@@ -54,6 +59,4 @@ def DeepModel(size_set=640):
     out10 = average([out6, out7, out8, out9])
     # out10 = Conv2D(1, (1, 1), activation='sigmoid', name='side_10')(out10)
 
-    model = Model(inputs=[img_input], outputs=[out10])
-
-    return model
+    return Model(inputs=[img_input], outputs=[out10])

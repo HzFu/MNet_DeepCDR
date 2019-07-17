@@ -4,10 +4,10 @@ from __future__ import print_function
 import random
 from os import path
 
-from keras.optimizers import SGD
+from tensorflow.python.keras.optimizers import SGD
 
-from mnet_utils import dice_coef_loss, train_loader, mk_dir, return_list
 import Model_MNet as DeepModel
+from mnet_utils import dice_coef_loss, train_loader, mk_dir, return_list
 
 result_path = mk_dir('deep_model')
 pre_model_file = path.join('deep_model', 'Model_MNet_REFUGE.h5')
