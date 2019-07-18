@@ -204,7 +204,7 @@ Q0 = [cos(alpha0), -sin(alpha0); sin(alpha0) cos(alpha0)];
 m = size(x, 2);
 
 % Get initial phase estimates
-phi0 = angle( [1 i] * Q0' * (x - repmat(z0, 1, m)) )';
+phi0 = angle([1 1i] * Q0' * (x - repmat(z0, 1, m)) )';
 u = [phi0; alpha0; a0; b0; z0];
 
 % Iterate using Gauss Newton
@@ -268,16 +268,16 @@ z     = u(end-1:end);
         % Preallocate function and Jacobian variables
         f = zeros(2 * m, 1);
         J = zeros(2 * m, m + 5);
-        for i = 1:m
-            rows = (2*i-1):(2*i);
+for j = 1 : m
+rows = (2 * j - 1) : (2 * j);
             % Equation system - vector difference between point on ellipse
             % and data point
-            f((2*i-1):(2*i)) = x(:, i) - z - Q * [a * cos(phi(i)); b * sin(phi(i))];
+f((2 * j - 1) : (2 * j)) = x( : , j) - z - Q *[a * cos(phi(j)); b * sin(phi(j))];
             
             % Jacobian
-            J(rows, i) = -Q * [-a * s(i); b * c(i)];
+J(rows, j) = -Q *[-a * s(j); b * c(j)];
             J(rows, (end-4:end)) = ...
-                [-Qdot*[a*c(i); b*s(i)], -Q*[c(i); 0], -Q*[0; s(i)], [-1 0; 0 -1]];
+[-Qdot *[a * c(j); b * s(j)], -Q *[c(j); 0], -Q *[0; s(j)], [-1 0; 0 - 1]];
         end
     end
 end % fitnonlinear
@@ -345,7 +345,7 @@ end
 % Cell array of valid property names
 properties = {'constraint', 'maxits', 'tol'};
 
-while length(varargin) ~= 0
+while ~ isempty(varargin)
     % Pop pair off varargin
     property      = varargin{1};
     value         = varargin{2};
