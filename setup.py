@@ -28,7 +28,7 @@ if __name__ == '__main__':
     _data_join, _data_install_dir = to_funcs('_data')
     ipynb_checkpoints_join, ipynb_checkpoints_install_dir = to_funcs('.ipynb_checkpoints')
     deep_model_join, deep_model_install_dir = to_funcs('deep_model')
-    mat_scr_join, mat_scr_install_dir = to_funcs('mat_scr')
+    # mat_scr_join, mat_scr_install_dir = to_funcs('mat_scr')
     REFUGE_result_join, REFUGE_result_install_dir = to_funcs('REFUGE_result')
     result_join, result_install_dir = to_funcs('result')
     test_img_join, test_img_install_dir = to_funcs('test_img')
@@ -45,7 +45,7 @@ if __name__ == '__main__':
             (_data_install_dir(), list(imap(_data_join, listdir(_data_join())))),
             (ipynb_checkpoints_install_dir(), list(imap(ipynb_checkpoints_join, listdir(ipynb_checkpoints_join())))),
             (deep_model_install_dir(), list(imap(deep_model_join, listdir(deep_model_join())))),
-            (mat_scr_install_dir(), list(imap(mat_scr_join, listdir(mat_scr_join())))),
+            # (mat_scr_install_dir(), list(imap(mat_scr_join, listdir(mat_scr_join())))),
             (REFUGE_result_install_dir(), list(imap(REFUGE_result_join, listdir(REFUGE_result_join())))),
             (result_install_dir(), list(imap(result_join, listdir(result_join())))),
             (test_img_install_dir(), list(imap(test_img_join, listdir(test_img_join()))))

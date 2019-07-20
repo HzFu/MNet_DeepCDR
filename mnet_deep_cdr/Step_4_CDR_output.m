@@ -1,4 +1,4 @@
-%
+% You'll need to extract 'mat_scr.zip' for this to work.
 clear; close all;
 addpath(genpath(['mat_scr' filesep]));
 
