@@ -35,9 +35,14 @@ OpenCV will need to be installed separately.
 
 **If you use this code, please cite the following papers:**
 
-[1] Huazhu Fu, Jun Cheng, Yanwu Xu, Damon Wing Kee Wong, Jiang Liu, and Xiaochun Cao, "Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation", IEEE Transactions on Medical Imaging (TMI), vol. 37, no. 7, pp. 1597–1605, 2018. ([ArXiv version](https://arxiv.org/abs/1801.00926))  
+1. Huazhu Fu, Jun Cheng, Yanwu Xu, Damon Wing Kee Wong, Jiang Liu, and Xiaochun Cao, "Joint Optic Disc and Cup Segmentation Based on Multi-label Deep Network and Polar Transformation", IEEE Transactions on Medical Imaging (TMI), vol. 37, no. 7, pp. 1597–1605, 2018. [[PDF]](https://arxiv.org/abs/1801.00926)  
+2. Huazhu Fu, Jun Cheng, Yanwu Xu, Changqing Zhang, Damon Wing Kee Wong, Jiang Liu, and Xiaochun Cao, "Disc-aware Ensemble Network for Glaucoma Screening from Fundus Image", IEEE Transactions on Medical Imaging (TMI), vol. 37, no. 11, pp. 2493–2501, 2018. [[PDF]](http://arxiv.org/abs/1805.07549)
 
-[2] Huazhu Fu, Jun Cheng, Yanwu Xu, Changqing Zhang, Damon Wing Kee Wong, Jiang Liu, and Xiaochun Cao, "Disc-aware Ensemble Network for Glaucoma Screening from Fundus Image", IEEE Transactions on Medical Imaging (TMI), vol. 37, no. 11, pp. 2493–2501, 2018. ([ArXiv version](http://arxiv.org/abs/1805.07549))
+
+**There are also some related works for medical image segmentation for your reference:**
+
+1. "Attention Guided Network for Retinal Image Segmentation," in MICCAI, 2019. [[PDF]](http://arxiv.org/abs/1907.12930) [[Github Code]](https://github.com/Guzaiwang/CE-Net)
+2. “CE-Net: Context Encoder Network for 2D Medical Image Segmentation,” IEEE TMI, 2019. [[PDF]](https://arxiv.org/abs/1903.02740) [[Github Code]](https://github.com/HzFu/AGNet)
 
 ---
 
