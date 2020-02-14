@@ -14,7 +14,8 @@ from tensorflow.python.keras.preprocessing import image
 
 def pro_process(temp_img, input_size):
     img = np.asarray(temp_img).astype('float32')
-    img = np.array(Image.fromarray(img).resize((input_size, input_size)).convert(3))
+    # img = np.array(Image.fromarray(img).resize((input_size, input_size)).convert(3))
+    img = np.array(Image.fromarray(img, mode='RGB').resize((input_size, input_size)))
     return img
 
 
