@@ -24,6 +24,7 @@ OpenCV will need to be installed separately.
 5. **Note: Due to the 'scipy.misc.imresize' in SciPy 1.0.0 has been removed in SciPy 1.3.0, the original trained model 'Model\_MNet\_REFUGE.h5' is not suitable. The results based on 'Model\_MNet\_REFUGE.h5' are different with the paper's. The updated model is ongoing... If you want to segment disc/cup from fundus image, you can consider our newest methods: CE-Net and AG-Net, which obtain the better performances and are also released in:**
 	- CE-Net: [https://github.com/Guzaiwang/CE-Net](https://github.com/Guzaiwang/CE-Net) 
 	- AG-Net: [https://github.com/HzFu/AGNet](https://github.com/HzFu/AGNet)
+6. A pytorch implementation of M-Net could be found in **AG-Net**: [https://github.com/HzFu/AGNet](https://github.com/HzFu/AGNet)
 
 
 ---
