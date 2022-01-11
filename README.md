@@ -57,6 +57,11 @@ Unfortunately, the ORIGA and SCES datasets cannot be released due to the clinica
 But, here is an other glaucoma challenge, [**Retinal Fundus Glaucoma Challenge (REFUGE)**](https://refuge.grand-challenge.org/home/), including disc/cup segmentation, glaucoma screening, and localization of Fovea. 
 
 ---
+**License**
+
+The code is released under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) for NonCommercial use only. Any commercial use should get formal permission first.
+
+---
 
 Update log:
 
